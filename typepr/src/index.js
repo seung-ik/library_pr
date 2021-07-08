@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var value = rand();
 var str = value;
+<<<<<<< HEAD
 // console.log(str * 10);
 function rand() {
     return "wowo";
@@ -25,3 +26,9 @@ var book = {
 function reader(b) {
     console.log(b.read);
 }
+=======
+console.log(str * 10);
+function rand() {
+    return "wowo";
+}
+>>>>>>> e9d21262507bd4dca306d9ca0e1a1e85bb48d5c2
