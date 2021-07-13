@@ -1,7 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactHtmlParser from 'react-html-parser'
+import {Button} from '@material-ui/core'
 
 function HeaderComponent (){
   const {t, i18n} = useTranslation('common');
@@ -16,12 +17,36 @@ function HeaderComponent (){
   )
 }
 
+const SpecialButton = ({children,color}) =>{
+  return <button style={{color}}>{children}</button>
+}
+
+const htmlFromCMS = `
+  <div>HI,
+    <SpecialButton color="red">My Button</SpecialButton>
+  </div>
+`
+
 function App() {
+  const inputRef = useRef();
   return (
-    <Suspense fallback="loading" >
+    <Suspense fallback="loading">
       <div className="App">
-        <HeaderComponent/>
+        <HeaderComponent />
       </div>
+
+      <div>{ReactHtmlParser(htmlFromCMS)}</div>
+
+      <Button variant="text" component="label">
+        파일 찾기
+        <input accept="image/*" type="file" hidden />
+      </Button>
+
+      <button component="label" onClick={()=>inputRef.current.click()}> 
+          파일 찾기
+          <input accept="image/*" type="file" hidden ref={inputRef}/>
+      </button>
+
     </Suspense>
   );
 }
